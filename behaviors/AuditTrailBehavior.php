@@ -79,7 +79,7 @@ class AuditTrailBehavior extends \yii\base\Behavior {
 	public $logDelete = true;
 
 	/**
-	 * @var \Closure[] contains an array with a model attribute as key and a either a string with
+	 * @var \Closure[] contains an array with a model attribute as key and either a string with
 	 * a default yii-format or a closure as its value. Example:
 	 * <code>
 	 * 		[
@@ -112,7 +112,17 @@ class AuditTrailBehavior extends \yii\base\Behavior {
 	 */
 	public $searchModelClass = null;
 	
+	/*
+	 * @var \Closure[] contains an array with a model attribute as key and a closure as its value.
+	 * 
+	 * This provides the behavior the ability to translate any values before storing it in database.
+	 */
 	public $convertAttributes = [];
+	
+	/*
+	 * @var string default 2-code/4-code language to use for converting attributes for logging. Defaults to English (en).
+	 */
+	public $defaultLanguage = 'en';
 
 	/**
 	 * @inheritdoc
@@ -330,7 +340,7 @@ class AuditTrailBehavior extends \yii\base\Behavior {
 	 */
 	protected function convertAttributeForSaving($entry) {
 		$user_language = Yii::$app->language;
-		Yii::$app->language = Yii::$app->params['DEFAULT_LANGUAGE'];
+		Yii::$app->language = $this->defaultLanguage;
 		$changes = $entry->changes ? : [];
 		foreach ($changes as $change) {
 			if (isset($this->convertAttributes[$change->attr])) {
