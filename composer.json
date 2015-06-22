@@ -1,0 +1,28 @@
+{
+	"name": "dpodium/yii2-audittrail",
+	"type": "yii2-extension",
+	"description": "Yii2-audittrail tracks changes to a model with behavior implementation, based on package asinfotrack/yii2-audittrail by Pascal Mueller, AS infotrack AG",
+	"keywords": ["yii2", "audittrail", "audit", "trail", "history", "behavior", "widget", "bundle"],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Darren Ng",
+			"email": "darren.ng@dpodium.com",
+			"homepage": "http://www.dpodium.com"
+		}
+	],
+	"minimum-stability": "stable",
+	"support": {
+		"source": "https://github.com/dpodium/yii2-audittrail",
+		"issues": "https://github.com/dpodium/yii2-audittrail/issues"
+	},
+	"require": {
+		"php": ">=5.4.0",
+		"yiisoft/yii2": "2.0.*"
+	},
+	"autoload": {
+		"psr-4": {
+			"dpodium\\yii2\\audittrail\\": ""
+		}
+	}
+}
