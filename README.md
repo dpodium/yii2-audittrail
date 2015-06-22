@@ -1,7 +1,7 @@
 # Yii2-audittrail
 Yii2-audittrail tracks changes to a model with behavior implementation.
 
-Based on package asinfotrack/yii2-audittrail by Pascal Mueller, AS infotrack AG.
+Based on package [asinfotrack/yii2-audittrail](https://github.com/asinfotrack/yii2-audittrail) by Pascal Mueller, AS infotrack AG.
 
 ## Installation
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
