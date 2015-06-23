@@ -301,7 +301,7 @@ class AuditTrail extends \yii\grid\GridView {
 				return Yii::$app->formatter->format($value, $attrOutput);
 			}
 		} else {
-			return Yii::$app->formatter->asText($value);
+			return Yii::$app->formatter->asNText($value);
 		}
 	}
 
