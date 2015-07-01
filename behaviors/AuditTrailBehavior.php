@@ -222,6 +222,7 @@ class AuditTrailBehavior extends \yii\base\Behavior {
             'happened_at' => $this->getHappenedAt(),
             'type' => $changeKind,
             'change_remark' => $this->getChangeRemark(),
+            'url' => isset(Yii::$app->request->absoluteUrl) ? substr(Yii::$app->request->absoluteUrl, 0, 255) : null,
         ]);
         $entry->setOwner($this->owner);
         $this->getUserDetail($entry);

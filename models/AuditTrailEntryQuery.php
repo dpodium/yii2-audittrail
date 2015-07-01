@@ -13,13 +13,12 @@ use dpodium\yii2\audittrail\helpers\AuditTrailHelper;
  */
 class AuditTrailEntryQuery extends \yii\db\ActiveQuery {
 
-	/**
-	 * Prepares the query with basic queries
-	 * 
-	 * @param \yii\db\ActiveRecord $subject the subject which the audit trail is keeping track of
-	 */
-	public function prepareQuery($subject) {
-        $this->orderBy(['happened_at' => SORT_DESC]);
+    /**
+     * Prepares the query with basic queries
+     * 
+     * @param \yii\db\ActiveRecord $subject the subject which the audit trail is keeping track of
+     */
+    public function prepareQuery($subject) {
         if (isset($subject)) {
             $this->andWhere(['model_type' => $subject::className(), 'foreign_pk' => static::createPrimaryKeyJson($subject)]);
         }
@@ -29,4 +28,5 @@ class AuditTrailEntryQuery extends \yii\db\ActiveQuery {
     protected static function createPrimaryKeyJson($model) {
         return AuditTrailHelper::createPrimaryKeyJson($model);
     }
+
 }

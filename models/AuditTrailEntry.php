@@ -22,6 +22,7 @@ use dpodium\yii2\audittrail\helpers\AuditTrailHelper;
  * @property string $foreign_pk
  * @property integer $user_id
  * @property string $user_ipaddress
+ * @property string $url
  * @property string $change_remark
  * @property string $type
  * @property string $data
@@ -68,6 +69,7 @@ class AuditTrailEntry extends \yii\db\ActiveRecord {
             'change_remark' => Yii::t('app', 'Change Remark'),
             'type' => Yii::t('app', 'Type'),
             'data' => Yii::t('app', 'Data'),
+            'url' => Yii::t('app', 'Url'),
         ];
     }
 

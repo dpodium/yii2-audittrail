@@ -47,6 +47,7 @@ class AuditTrailHelper {
             },
         ];
     }
+
     /**
      * Create the user id column configuration in yii2 GridView format
      * 
@@ -81,56 +82,60 @@ class AuditTrailHelper {
             'attribute' => 'data',
             'format' => 'raw',
             'value' => function($model, $key, $index, $column) use ($dataTableOptions, $dataTableColumnWidths, $hiddenAttributes, $outputAttributes) {
-                //catch empty data
-                $changes = $model->changes;
-                if ($changes === null || count($changes) == 0) {
-                    return null;
-                }
-
-                $ret = Html::beginTag('table', $dataTableOptions);
-
-                //colgroup
-                $ret .= Html::beginTag('colgroup');
-                $widths = $dataTableColumnWidths;
-                $ret .= Html::tag('col', '', ['style' => sprintf('width: %s;', isset($widths['attribute']) ? $widths['attribute'] : 'auto')]);
-                if ($model->type === AuditTrailBehavior::AUDIT_TYPE_UPDATE) {
-                    $ret .= Html::tag('col', '', ['style' => sprintf('width: %s;', isset($widths['from']) ? $widths['from'] : 'auto')]);
-                }
-                $ret .= Html::tag('col', '', ['style' => sprintf('width: %s;', isset($widths['to']) ? $widths['to'] : 'auto')]);
-
-                //table head
-                $ret .= Html::beginTag('thead');
-                $ret .= Html::beginTag('tr');
-                $ret .= Html::tag('th', Yii::t('app', 'Attribute'));
-                if ($model->type === AuditTrailBehavior::AUDIT_TYPE_UPDATE) {
-                    $ret .= Html::tag('th', Yii::t('app', 'From'));
-                }
-                $ret .= Html::tag('th', Yii::t('app', 'To'));
-                $ret .= Html::endTag('tr');
-                $ret .= Html::endTag('thead');
-
-                //table body
-                $ret .= Html::beginTag('tbody');
-                foreach ($changes as $change) {
-                    //skip hidden attributes
-                    if (in_array($change['attr'], $hiddenAttributes))
-                        continue;
-                    //render data row
-                    $ret .= Html::beginTag('tr');
-                    $ret .= Html::tag('td', self::formatAttr($model, $change['attr']));
-                    if ($model->type === AuditTrailBehavior::AUDIT_TYPE_UPDATE) {
-                        $ret .= Html::tag('td', self::formatValue($change['attr'], $change['from'], $outputAttributes));
-                    }
-                    $ret .= Html::tag('td', self::formatValue($change['attr'], $change['to'], $outputAttributes));
-                    $ret .= Html::endTag('tr');
-                }
-                $ret .= Html::endTag('tbody');
-
-                $ret .= Html::endTag('table');
-
-                return $ret;
+                return self::renderDataTable($model, $dataTableOptions, $dataTableColumnWidths, $hiddenAttributes, $outputAttributes);
             },
         ];
+    }
+
+    public static function renderDataTable($model, $dataTableOptions, $dataTableColumnWidths, $hiddenAttributes, $outputAttributes) {
+        //catch empty data
+        $changes = $model->changes;
+        if ($changes === null || count($changes) == 0) {
+            return null;
+        }
+
+        $ret = Html::beginTag('table', $dataTableOptions);
+
+        //colgroup
+        $ret .= Html::beginTag('colgroup');
+        $widths = $dataTableColumnWidths;
+        $ret .= Html::tag('col', '', ['style' => sprintf('width: %s;', isset($widths['attribute']) ? $widths['attribute'] : 'auto')]);
+        if ($model->type === AuditTrailBehavior::AUDIT_TYPE_UPDATE) {
+            $ret .= Html::tag('col', '', ['style' => sprintf('width: %s;', isset($widths['from']) ? $widths['from'] : 'auto')]);
+        }
+        $ret .= Html::tag('col', '', ['style' => sprintf('width: %s;', isset($widths['to']) ? $widths['to'] : 'auto')]);
+
+        //table head
+        $ret .= Html::beginTag('thead');
+        $ret .= Html::beginTag('tr');
+        $ret .= Html::tag('th', Yii::t('app', 'Attribute'));
+        if ($model->type === AuditTrailBehavior::AUDIT_TYPE_UPDATE) {
+            $ret .= Html::tag('th', Yii::t('app', 'From'));
+        }
+        $ret .= Html::tag('th', Yii::t('app', 'To'));
+        $ret .= Html::endTag('tr');
+        $ret .= Html::endTag('thead');
+
+        //table body
+        $ret .= Html::beginTag('tbody');
+        foreach ($changes as $change) {
+            //skip hidden attributes
+            if (in_array($change['attr'], $hiddenAttributes))
+                continue;
+            //render data row
+            $ret .= Html::beginTag('tr');
+            $ret .= Html::tag('td', self::formatAttr($model, $change['attr']));
+            if ($model->type === AuditTrailBehavior::AUDIT_TYPE_UPDATE) {
+                $ret .= Html::tag('td', self::formatValue($change['attr'], $change['from'], $outputAttributes));
+            }
+            $ret .= Html::tag('td', self::formatValue($change['attr'], $change['to'], $outputAttributes));
+            $ret .= Html::endTag('tr');
+        }
+        $ret .= Html::endTag('tbody');
+
+        $ret .= Html::endTag('table');
+
+        return $ret;
     }
 
     /**
