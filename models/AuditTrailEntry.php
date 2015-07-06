@@ -26,6 +26,8 @@ use dpodium\yii2\audittrail\helpers\AuditTrailHelper;
  * @property string $change_remark
  * @property string $type
  * @property string $data
+ * @property int $picoseconds_collect_data
+ * @property int $picoseconds_convert_attribute
  * 
  * @property \stdClass[] $changes
  */
@@ -49,7 +51,7 @@ class AuditTrailEntry extends \yii\db\ActiveRecord {
     public function rules() {
         return [
             [['model_type', 'happened_at', 'foreign_pk', 'type'], 'required'],
-            [['happened_at', 'user_id'], 'integer'],
+            [['happened_at', 'user_id', 'picoseconds_collect_data', 'picoseconds_convert_attribute'], 'integer'],
             [['model_type', 'foreign_pk', 'type', 'user_ipaddress'], 'string', 'max' => 255],
             [['type'], 'in', 'range' => AuditTrailBehavior::$AUDIT_TYPES],
         ];

@@ -129,6 +129,13 @@ class AuditTrailBehavior extends \yii\base\Behavior {
      * Use 'function(\dpodium\yii2\audittrail\models\AuditTrailEntry) { }' and return the entry or null (stops the logging)
      */
     public $customLog = null;
+    
+    /**
+     * @var boolean whether to store benchmark numbers.
+     */
+    public $enableBenchmark = true;
+    
+    private $milestoneTime = null;
 
     /**
      * @inheritdoc
@@ -218,6 +225,7 @@ class AuditTrailBehavior extends \yii\base\Behavior {
      * @return \dpodium\yii2\audittrail\models\AuditTrailEntry the entry
      */
     protected function createPreparedAuditTrailEntry($changeKind) {
+        $this->milestoneTime = microtime(true);
         $entry = new $this->entryModelClass([
             'happened_at' => $this->getHappenedAt(),
             'type' => $changeKind,
@@ -297,6 +305,10 @@ class AuditTrailBehavior extends \yii\base\Behavior {
                 $entry->setChange($attrName, $oldVal, $newVal);
             }
         }
+        if ($this->enableBenchmark) {
+            $entry->picoseconds_collect_data = round((microtime(true) - $this->milestoneTime) * pow(10, 8));
+            $this->milestoneTime = microtime(true);
+        }
         return $entry;
     }
 
@@ -369,7 +381,9 @@ class AuditTrailBehavior extends \yii\base\Behavior {
                 return;
             }
         }
-
+        if ($this->enableBenchmark) {
+            $entry->picoseconds_convert_attribute = round((microtime(true) - $this->milestoneTime) * pow(10, 8));
+        }
         //do nothing if successful
         if ($entry->save()) {
             return;
