@@ -17,7 +17,7 @@ class m150701_000000_url_column extends \yii\db\Migration {
      */
     public function up() {
 
-        $this->addColumn('{{%audit_trail_entry}}', 'url', Schema::TYPE_STRING . ' NULL');
+        $this->addColumn('{{%audit_trail_entry}}', 'url', Schema::TYPE_TEXT . ' NULL');
     }
 
     /**
