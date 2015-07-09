@@ -33,10 +33,6 @@ class m150619_000000_audit_trail_entry_table extends \yii\db\Migration
 			new Expression('`model_type` ASC'), 
 			new Expression('`happened_at` DESC'),
 		]);
-		$this->addForeignKey('FK_audit_trail_entry_user', 
-			'{{%audit_trail_entry}}', ['user_id'], 
-			'{{%user}}', ['id'], 
-			'SET NULL', 'CASCADE');
 	}
 	
 	/**
@@ -44,7 +40,6 @@ class m150619_000000_audit_trail_entry_table extends \yii\db\Migration
 	 */
 	public function down()
 	{
-		$this->dropForeignKey('FK_audit_trail_entry_user', 'audit_trail_entry');
 		$this->dropIndex('IN_audit_trail_entry_fast_access', '{{%audit_trail_entry}}');
 		$this->dropTable('{{%audit_trail_entry}}');
 	}
