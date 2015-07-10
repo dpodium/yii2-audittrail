@@ -306,7 +306,7 @@ class AuditTrailBehavior extends \yii\base\Behavior {
             }
         }
         if ($this->enableBenchmark) {
-            $entry->picoseconds_collect_data = round((microtime(true) - $this->milestoneTime) * pow(10, 8));
+            $entry->picoseconds_collect_data = round((microtime(true) - $this->milestoneTime) * pow(10, 6));
             $this->milestoneTime = microtime(true);
         }
         return $entry;
@@ -382,7 +382,7 @@ class AuditTrailBehavior extends \yii\base\Behavior {
             }
         }
         if ($this->enableBenchmark) {
-            $entry->picoseconds_convert_attribute = round((microtime(true) - $this->milestoneTime) * pow(10, 8));
+            $entry->picoseconds_convert_attribute = round((microtime(true) - $this->milestoneTime) * pow(10, 6));
         }
         //do nothing if successful
         if ($entry->save()) {
