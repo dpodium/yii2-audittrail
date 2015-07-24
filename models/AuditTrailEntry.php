@@ -72,6 +72,8 @@ class AuditTrailEntry extends \yii\db\ActiveRecord {
             'type' => Yii::t('app', 'Type'),
             'data' => Yii::t('app', 'Data'),
             'url' => Yii::t('app', 'Url'),
+            'picoseconds_collect_data' => Yii::t('app', 'Data collection in picoseconds'),
+            'picoseconds_convert_attribute' => Yii::t('app', 'Attribute conversion in picoseconds'),
         ];
     }
 

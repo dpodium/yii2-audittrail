@@ -135,6 +135,11 @@ class AuditTrailBehavior extends \yii\base\Behavior {
      */
     public $enableBenchmark = true;
     
+    /**
+     * @var string comma-separated scenarios to look for to log, if unspecified, defaults to log all
+     */
+    public $scenarios;
+    
     private $milestoneTime = null;
 
     /**
@@ -171,6 +176,9 @@ class AuditTrailBehavior extends \yii\base\Behavior {
     public function onAfterInsert($event) {
         if (!$this->logInsert)
             return;
+        if ($this->scenarios && !in_array($this->owner->scenario, explode(',', $this->scenarios))) {
+            return;
+        }
         $entry = $this->createPreparedAuditTrailEntry(static::AUDIT_TYPE_INSERT);
 
         //if configured write initial values
@@ -189,6 +197,9 @@ class AuditTrailBehavior extends \yii\base\Behavior {
     public function onAfterUpdate($event) {
         if (!$this->logUpdate)
             return;
+        if ($this->scenarios && !in_array($this->owner->scenario, explode(',', $this->scenarios))) {
+            return;
+        }
         $entry = $this->createPreparedAuditTrailEntry(static::AUDIT_TYPE_UPDATE);
 
         //fetch dirty attributes and add changes
@@ -208,6 +219,9 @@ class AuditTrailBehavior extends \yii\base\Behavior {
     public function onAfterDelete($event) {
         if (!$this->logDelete)
             return;
+        if ($this->scenarios && !in_array($this->owner->scenario, explode(',', $this->scenarios))) {
+            return;
+        }
         $entry = $this->createPreparedAuditTrailEntry(static::AUDIT_TYPE_DELETE);
 
         //if configured write end values
