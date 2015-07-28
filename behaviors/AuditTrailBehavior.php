@@ -260,9 +260,9 @@ class AuditTrailBehavior extends \yii\base\Behavior {
     protected function getUserDetail($entry) {
         if (Yii::$app instanceof \yii\console\Application) {
             if ($this->consoleUserId instanceof \Closure) {
-                return call_user_func($this->consoleUserId);
+                $entry->user_id = call_user_func($this->consoleUserId);
             } else {
-                return $this->consoleUserId;
+                $entry->user_id = $this->consoleUserId;
             }
         } else if (Yii::$app->user->isGuest) {
             $entry->user_id = null;
