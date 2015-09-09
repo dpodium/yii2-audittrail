@@ -14,9 +14,10 @@ use yii\helpers\Json;
  * To enable the behavior on a model simply add it to its behaviors. Further configuration is
  * possible. Check out this classes attributes to see what options there are.
  * 
- * @author Darren Ng, Dynamic Podium
- * @link http://www.dpodium.com
+ * @author Pascal Mueller, AS infotrack AG
+ * @link http://www.asinfotrack.ch
  * @license MIT
+ * @extendedby Darren Ng, Dynamic Podium (http://www.dpodium.com)
  */
 class AuditTrailBehavior extends \yii\base\Behavior {
 

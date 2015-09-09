@@ -6,9 +6,10 @@ use yii\db\Expression;
 /**
  * Migration to create or remove audit trail entry table
  * 
- * @author Darren Ng, Dynamic Podium
- * @link http://www.dpodium.com
+ * @author Pascal Mueller, AS infotrack AG
+ * @link http://www.asinfotrack.ch
  * @license MIT
+ * @extendedby Darren Ng, Dynamic Podium (http://www.dpodium.com)
  */
 class m150619_000000_audit_trail_entry_table extends \yii\db\Migration
 {

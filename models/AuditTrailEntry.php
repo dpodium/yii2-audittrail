@@ -12,9 +12,10 @@ use dpodium\yii2\audittrail\helpers\AuditTrailHelper;
 /**
  * This is the model class for audit trail entries and the table "audit_trail_entry".
  * 
- * @author Darren Ng, Dynamic Podium
- * @link http://www.dpodium.com
+ * @author Pascal Mueller, AS infotrack AG
+ * @link http://www.asinfotrack.ch
  * @license MIT
+ * @extendedby Darren Ng, Dynamic Podium (http://www.dpodium.com)
  * 
  * @property integer $id
  * @property string $model_type

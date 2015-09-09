@@ -8,6 +8,14 @@ use yii\helpers\Json;
 use yii\helpers\Html;
 use dpodium\yii2\audittrail\behaviors\AuditTrailBehavior;
 
+/**
+ * Helper class for Audit Trail. Some code referred from:
+ * /asinfotrack/yii2-audittrail by Pascal Mueller, AS infotrack AG
+ * 
+ * @author Darren Ng, Dynamic Podium
+ * @link http://www.dpodium.com
+ * @license MIT
+ */
 class AuditTrailHelper {
 
     public static function createPrimaryKeyJson($model) {

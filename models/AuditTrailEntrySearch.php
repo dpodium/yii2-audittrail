@@ -9,9 +9,10 @@ use dpodium\yii2\audittrail\behaviors\AuditTrailBehavior;
 /**
  * Search class for audit trail entries
  *
- * @author Darren Ng, Dynamic Podium
- * @link http://www.dpodium.com
+ * @author Pascal Mueller, AS infotrack AG
+ * @link http://www.asinfotrack.ch
  * @license MIT
+ * @extendedby Darren Ng, Dynamic Podium (http://www.dpodium.com)
  */
 class AuditTrailEntrySearch extends \dpodium\yii2\audittrail\models\AuditTrailEntry {
 

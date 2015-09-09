@@ -18,13 +18,14 @@ use yii\base\InvalidConfigException;
  * 		'changeTypeCallback'=>function ($type, $model) {
  * 			return Html::tag('span', strtoupper($type), ['class'=>'label label-info']);
  * 		},
- * 		'dataTableOptions'=>['class'=>'table table-condensed table-bordered'],
+ *		'dataTableOptions'=>['class'=>'table table-condensed table-bordered'],
  * ]);
  * </code>
  * 
- * @author Darren Ng, Dynamic Podium
- * @link http://www.dpodium.com
+ * @author Pascal Mueller, AS infotrack AG
+ * @link http://www.asinfotrack.ch
  * @license MIT
+ * @extendedby Darren Ng, Dynamic Podium (http://www.dpodium.com)
  */
 class AuditTrail extends \dpodium\yii2\audittrail\components\BaseAuditTrail {
 

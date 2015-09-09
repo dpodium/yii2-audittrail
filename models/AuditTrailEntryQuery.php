@@ -6,10 +6,11 @@ use dpodium\yii2\audittrail\helpers\AuditTrailHelper;
 
 /**
  * Query class for audit trail entries
- *
- * @author Darren Ng, Dynamic Podium
- * @link http://www.dpodium.com
+ * 
+ * @author Pascal Mueller, AS infotrack AG
+ * @link http://www.asinfotrack.ch
  * @license MIT
+ * @extendedby Darren Ng, Dynamic Podium (http://www.dpodium.com)
  */
 class AuditTrailEntryQuery extends \yii\db\ActiveQuery {
 

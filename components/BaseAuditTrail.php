@@ -97,6 +97,4 @@ class BaseAuditTrail extends \yii\grid\GridView {
             AuditTrailHelper::createDataColumnConfig($this->dataTableOptions, $this->dataTableColumnWidths, $this->hiddenAttributes, $this->attributeOutput),
         ];
     }
-
-
 }

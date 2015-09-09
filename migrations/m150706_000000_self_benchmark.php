@@ -4,7 +4,7 @@ use yii\db\Schema;
 use yii\db\Expression;
 
 /**
- * Migration to create or remove audit trail entry table
+ * Migration to create self benchmark columns
  * 
  * @author Darren Ng, Dynamic Podium
  * @link http://www.dpodium.com
