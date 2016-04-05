@@ -268,7 +268,9 @@ class AuditTrailBehavior extends \yii\base\Behavior {
         } else if (Yii::$app->user->isGuest) {
             $entry->user_id = null;
         } else {
-            $entry->user_id = Yii::$app->user->id;
+            if (!empty(Yii::$app->user->id)) {
+                $entry->user_id = Yii::$app->user->id;
+            }
             $entry->user_ipaddress = isset(Yii::$app->request->userIP) ? Yii::$app->request->userIP : null;
         }
         return $entry;
