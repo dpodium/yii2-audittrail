@@ -285,7 +285,7 @@ class AuditTrailBehavior extends \yii\base\Behavior {
         if ($this->changeRemark instanceof \Closure) {
             return call_user_func($this->changeRemark);
         } else {
-            return Yii::$app->request->post($this->changeRemark, Yii::$app->request->get($this->changeRemark, null));
+            return Yii::$app->request->isConsoleRequest ? null : (Yii::$app->request->post($this->changeRemark, Yii::$app->request->get($this->changeRemark, null)));
         }
     }
 
