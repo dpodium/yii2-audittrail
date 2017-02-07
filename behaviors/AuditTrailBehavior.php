@@ -265,7 +265,7 @@ class AuditTrailBehavior extends \yii\base\Behavior {
             } else {
                 $entry->user_id = $this->consoleUserId;
             }
-        } else if (Yii::$app->user->isGuest) {
+        } else if (Yii::$app->user->getIsGuest()) {
             $entry->user_id = null;
         } else {
             if (!empty(Yii::$app->user->id)) {
