@@ -130,12 +130,12 @@ class AuditTrailBehavior extends \yii\base\Behavior {
      * Use 'function(\dpodium\yii2\audittrail\models\AuditTrailEntry) { }' and return the entry or null (stops the logging)
      */
     public $customLog = null;
-    
+
     /**
      * @var boolean whether to store benchmark numbers.
      */
     public $enableBenchmark = true;
-    
+
     /**
      * @var string comma-separated scenarios to look for to log, if unspecified, defaults to log all
      */
@@ -318,7 +318,7 @@ class AuditTrailBehavior extends \yii\base\Behavior {
                 }
                 $oldVal = $event->changedAttributes[$attrName] !== '' ? $event->changedAttributes[$attrName] : null;
             }
-            if ($oldVal != $newVal) {
+            if ($this->compareOldAndNewValue($oldVal, $newVal)) {
                 $entry->setChange($attrName, $oldVal, $newVal);
             }
         }
@@ -327,6 +327,16 @@ class AuditTrailBehavior extends \yii\base\Behavior {
             $this->milestoneTime = microtime(true);
         }
         return $entry;
+    }
+
+    protected function compareOldAndNewValue($oldVal, $newVal) {
+        if (!is_string($oldVal)) {
+            $oldVal = (string) $oldVal;
+        }
+        if (!is_string($newVal)) {
+            $newVal = (string) $newVal;
+        }
+        return $oldVal != $newVal;
     }
 
     /**
